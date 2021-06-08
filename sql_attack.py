@@ -22,17 +22,10 @@ node_data = json.loads(json_data)
 
 sqlmap_command = ["sqlmap"]
 sqlmap_command.append('--answers=keep testing=Y')
-
-# TODO ADD level==5 and risk==3 ,  REMOVE --forms.
-
-
-#sqlmap_command.append('testing=Y\'')
-sqlmap_command.append("--batch") #Can replace with --answers [list of answers] if batch misses vulns. (Attack more params if one is found)
+sqlmap_command.append("--batch")
 sqlmap_command.append("-v")
 sqlmap_command.append("0")
 sqlmap_command.append("--flush-session")
-#sqlmap_command.append("--risk=3")
-#sqlmap_command.append("--level=5")
 if "url" in node_data:
   sqlmap_command.append("-u")
   sqlmap_command.append(node_data["url"])
@@ -47,7 +40,6 @@ if "data" in node_data and node_data["method"] == "get":
 if "parameters" in node_data and node_data["parameters"] != "":
   sqlmap_command.append("-p")
   sqlmap_command.append(node_data["parameters"])
-
 
 
 attack = subprocess.run(sqlmap_command, capture_output=True, text=True)
