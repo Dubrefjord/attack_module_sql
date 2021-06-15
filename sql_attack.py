@@ -7,9 +7,7 @@ import json
 def filter_sqlmap_output(output):
     save_data = False
     filtered_output = ""
-    f = open("debugfile.txt", "a")
     for line in output.splitlines():
-        f.write(line+"\n")
         if line.find("---") != -1:
             save_data = not save_data
         if save_data:
